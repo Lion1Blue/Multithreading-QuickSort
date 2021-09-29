@@ -26,9 +26,8 @@ namespace Multithreading_Sortieralgorithmen
             Random random = new Random();
 
             for (int i = 0; i < array1.Length; i++)
-            {
-                array1[i] = (double)random.Next(0, int.MaxValue);
-            }
+                array1[i] = Convert.ToDouble(random.Next(0, int.MaxValue));
+
 
             double[] array2 = new double[array1.Length];
             Array.Copy(array1, array2, array1.Length);
@@ -47,17 +46,31 @@ namespace Multithreading_Sortieralgorithmen
 
             Console.WriteLine($"[ArraySort]Sorted in {stopwatch1.ElapsedMilliseconds} ms");
 
-
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
             QuickSort.Sort(array2, 0, array2.Length - 1);
             stopwatch.Stop();
 
             Console.WriteLine($"[Normal]Sorted in {stopwatch.ElapsedMilliseconds} ms");
-
+            Console.WriteLine(IsSorted(array2));
 
             AsyncQuickSort.Sort2Threads(array3, 0, array1.Length - 1);
+
             AsyncQuickSort.Sort4Threads(array4, 0, array3.Length - 1);
+
+        }
+
+        static bool IsSorted(double[] array)
+        {
+            for (int i = 1; i < array.Length; i++)
+            {
+                double a = array[i - 1];
+                double b = array[i];
+                if (!(a <= b))
+                    return false;
+            }
+
+            return true;
         }
     }
 }

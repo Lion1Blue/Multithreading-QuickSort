@@ -52,5 +52,20 @@ namespace Multithreading_Sortieralgorithmen
                 }
             }
         }
+
+        /*
+        public static void ParallelQuickSort(double[] array, int left, int right)
+        {
+            if (left < right)
+            {
+                int pivot = Partition(array, left, right);
+
+                Parallel.Invoke(
+                    () => ParallelQuickSort(array, left, pivot - 1),
+                    () => ParallelQuickSort(array, left, pivot - 1)
+                    );
+            }
+        }
+        */
     }
 }
