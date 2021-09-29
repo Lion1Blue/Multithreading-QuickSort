@@ -16,10 +16,11 @@ namespace Multithreading_Sortieralgorithmen
         [STAThread]
         static void Main()
         {
-            //Application.EnableVisualStyles();
-            //Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new Form1());
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new Form1());
 
+            /*
             double[] array1 = new double[10000000];
             double maxValue = 10d;
 
@@ -57,6 +58,7 @@ namespace Multithreading_Sortieralgorithmen
             AsyncQuickSort.Sort2Threads(array3, 0, array1.Length - 1);
 
             AsyncQuickSort.Sort4Threads(array4, 0, array3.Length - 1);
+            */
 
         }
 

@@ -2,14 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 
 namespace Multithreading_Sortieralgorithmen
 {
     class QuickSort
     {
+        public static event EventHandler<ValuesSwitchedEventArgs> ValuesSwitched;
+
+        public static bool Stop { get; set; } = false;
         public static void Sort(double[] array, int left, int right)
         {
+            if (Stop)
+                return;
+
             if (left < right)
             {
                 int pivot = Partition(array, left, right);
@@ -31,6 +37,9 @@ namespace Multithreading_Sortieralgorithmen
 
             while (true)
             {
+                if (Stop)
+                    return -1;
+
                 while (array[left] < pivot)
                     left++;
 
@@ -43,6 +52,8 @@ namespace Multithreading_Sortieralgorithmen
                     array[left] = array[right];
                     array[right] = temp;
 
+                    ValuesSwitched?.Invoke(null, new ValuesSwitchedEventArgs(left, right, array[left], array[right]));
+
                     if (array[left] == array[right])
                         left++;
                 }
@@ -52,20 +63,5 @@ namespace Multithreading_Sortieralgorithmen
                 }
             }
         }
-
-        /*
-        public static void ParallelQuickSort(double[] array, int left, int right)
-        {
-            if (left < right)
-            {
-                int pivot = Partition(array, left, right);
-
-                Parallel.Invoke(
-                    () => ParallelQuickSort(array, left, pivot - 1),
-                    () => ParallelQuickSort(array, left, pivot - 1)
-                    );
-            }
-        }
-        */
     }
 }

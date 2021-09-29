@@ -15,6 +15,18 @@ namespace Multithreading_Sortieralgorithmen
             Sort2Threads(array, 0, array.Length - 1);
         }
 
+        public static void Sort1Thread(double[] array, int left, int right)
+        {
+            AsyncQuickSortWrapper wrapper = new AsyncQuickSortWrapper();
+            wrapper.Array = array;
+            wrapper.Left = left;
+            wrapper.Right = right;
+
+            Thread thread = new Thread(wrapper.Sort);
+
+            thread.Start();
+        }
+
         public static void Sort2Threads(double[] array, int left, int right)
         {
             Stopwatch stopwatch = new Stopwatch();
@@ -40,8 +52,8 @@ namespace Multithreading_Sortieralgorithmen
                 thread.Start();
             }
 
-            foreach (Thread t in threads)
-                t.Join();
+            //foreach (Thread t in threads)
+            //    t.Join();
 
             stopwatch.Stop();
 
