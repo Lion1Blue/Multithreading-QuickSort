@@ -49,7 +49,7 @@ using System.Threading
 
 **************************************************************************************************************************************************************************
 
-### c ohne Übergabeparameter
+### Funktionsaufruf ohne Übergabeparameter
 
 Um Funktionen in einem Neuen Thread zu starten, muss dem Thread im Knostruktor die auszuführende Funktion übergeben werden.
 
