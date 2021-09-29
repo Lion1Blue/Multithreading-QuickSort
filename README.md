@@ -47,6 +47,10 @@ Threads sind in c# im Namespace enthalten.
 using System.Threading
 ````
 
+**************************************************************************************************************************************************************************
+
+### Funktionen ohne Übergabeparameter
+
 Um Funktionen in einem Neuen Thread zu starten, muss dem Thread im Knostruktor die auszuführende Funktion übergeben werden.
 
 ````c#
@@ -71,6 +75,8 @@ newThread.Start();
 Auf diese Art und Weise können jedoch nur Funktionen mit keinem Übergabeparameter aufgerufen werden.  
 
 **************************************************************************************************************************************************************************
+
+### Funktionen mit Übergabeparameter
 
 Will man eine Funktion mit mehreren Übergabeparametern aufrufen, ist man gezwugen die Thread-Methode Bestandteil einer Klasse zu machen, deren Eigenschaften als Argumente von dem Thread ausgelesen werden können.  
 Die Übergabe erfolgt dann über die Setter der Klasse.
