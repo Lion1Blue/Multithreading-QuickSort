@@ -20,6 +20,7 @@ namespace Multithreading_Sortieralgorithmen
 
         public static void Sort2Threads(double[] array, int left, int right)
         {
+            threads.Clear();
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
 
@@ -45,17 +46,16 @@ namespace Multithreading_Sortieralgorithmen
                 t.Join();
 
             stopwatch.Stop();
-            threads.Clear();
+            PictureBoxHelperClass.BigUpdate = true;
 
             Console.WriteLine($"[Async2]Sorted in {stopwatch.ElapsedMilliseconds} ms");
         }
 
         public static void Sort4Threads(double[] array, int left, int right)
         {
+            threads.Clear();
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
-
-            List<Thread> threads = new List<Thread>();
 
             int[] pivots = new int[5];
             pivots[0] = left;
@@ -84,7 +84,6 @@ namespace Multithreading_Sortieralgorithmen
                 t.Join();
 
             stopwatch.Stop();
-            threads.Clear();
 
             Console.WriteLine($"[Async4]Sorted in {stopwatch.ElapsedMilliseconds} ms");
         }
