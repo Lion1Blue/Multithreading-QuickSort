@@ -38,7 +38,10 @@ namespace Multithreading_Sortieralgorithmen
             this.rbQuickSort = new System.Windows.Forms.RadioButton();
             this.buttonSort = new System.Windows.Forms.Button();
             this.buttonBreak = new System.Windows.Forms.Button();
+            this.pictureBox = new System.Windows.Forms.PictureBox();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.groupBoxAlgorithmns.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonGenerate
@@ -55,8 +58,9 @@ namespace Multithreading_Sortieralgorithmen
             // 
             this.textBoxElements.Location = new System.Drawing.Point(118, 12);
             this.textBoxElements.Name = "textBoxElements";
-            this.textBoxElements.Size = new System.Drawing.Size(75, 20);
+            this.textBoxElements.Size = new System.Drawing.Size(87, 20);
             this.textBoxElements.TabIndex = 1;
+            this.textBoxElements.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.textBoxElements.Validating += new System.ComponentModel.CancelEventHandler(this.textBox1_Validating);
             // 
             // label1
@@ -135,11 +139,35 @@ namespace Multithreading_Sortieralgorithmen
             this.buttonBreak.UseVisualStyleBackColor = true;
             this.buttonBreak.Click += new System.EventHandler(this.buttonBreak_Click);
             // 
+            // pictureBox
+            // 
+            this.pictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox.Location = new System.Drawing.Point(211, 12);
+            this.pictureBox.Name = "pictureBox";
+            this.pictureBox.Size = new System.Drawing.Size(613, 485);
+            this.pictureBox.TabIndex = 8;
+            this.pictureBox.TabStop = false;
+            this.pictureBox.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_Paint);
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.richTextBox1.Location = new System.Drawing.Point(13, 180);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(192, 317);
+            this.richTextBox1.TabIndex = 9;
+            this.richTextBox1.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(836, 509);
+            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.pictureBox);
             this.Controls.Add(this.buttonBreak);
             this.Controls.Add(this.buttonSort);
             this.Controls.Add(this.groupBoxAlgorithmns);
@@ -150,6 +178,7 @@ namespace Multithreading_Sortieralgorithmen
             this.Text = "Visualisation-QuickSort";
             this.groupBoxAlgorithmns.ResumeLayout(false);
             this.groupBoxAlgorithmns.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -166,6 +195,8 @@ namespace Multithreading_Sortieralgorithmen
         private System.Windows.Forms.RadioButton rbQuickSort;
         private System.Windows.Forms.Button buttonSort;
         private System.Windows.Forms.Button buttonBreak;
+        private System.Windows.Forms.PictureBox pictureBox;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

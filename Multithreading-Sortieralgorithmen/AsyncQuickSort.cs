@@ -5,34 +5,23 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 using System.Diagnostics;
+using System.Drawing;
 
 namespace Multithreading_Sortieralgorithmen
 {
     class AsyncQuickSort
     {
+        static List<Thread> threads = new List<Thread>();
+        static Color[] colors = new Color[4] { Color.Orange, Color.Red, Color.Navy, Color.DarkOliveGreen };
         public static void Sort(double[] array)
         {
             Sort2Threads(array, 0, array.Length - 1);
-        }
-
-        public static void Sort1Thread(double[] array, int left, int right)
-        {
-            AsyncQuickSortWrapper wrapper = new AsyncQuickSortWrapper();
-            wrapper.Array = array;
-            wrapper.Left = left;
-            wrapper.Right = right;
-
-            Thread thread = new Thread(wrapper.Sort);
-
-            thread.Start();
         }
 
         public static void Sort2Threads(double[] array, int left, int right)
         {
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
-
-            List<Thread> threads = new List<Thread>();
 
             int[] pivots = new int[3];
             pivots[0] = left;
@@ -52,10 +41,11 @@ namespace Multithreading_Sortieralgorithmen
                 thread.Start();
             }
 
-            //foreach (Thread t in threads)
-            //    t.Join();
+            foreach (Thread t in threads)
+                t.Join();
 
             stopwatch.Stop();
+            threads.Clear();
 
             Console.WriteLine($"[Async2]Sorted in {stopwatch.ElapsedMilliseconds} ms");
         }
@@ -70,7 +60,10 @@ namespace Multithreading_Sortieralgorithmen
             int[] pivots = new int[5];
             pivots[0] = left;
             pivots[2] = QuickSort.Partition(array, left, right);
-            pivots[1] = QuickSort.Partition(array, left, pivots[2] - 1);
+            if (pivots[2] >= 1)
+                pivots[1] = QuickSort.Partition(array, left, pivots[2] - 1);
+            else
+                pivots[1] = 0;
             pivots[3] = QuickSort.Partition(array, pivots[2] + 1, right);
             pivots[4] = right;
 
@@ -91,8 +84,19 @@ namespace Multithreading_Sortieralgorithmen
                 t.Join();
 
             stopwatch.Stop();
+            threads.Clear();
 
             Console.WriteLine($"[Async4]Sorted in {stopwatch.ElapsedMilliseconds} ms");
+        }
+
+        public static Color ThreadToColor(Thread thread)
+        {
+            for (int i = 0; i < threads.Count; i++)
+                if (thread == threads[i])
+                    return colors[i];
+
+            return Color.Black;
+
         }
     }
 }

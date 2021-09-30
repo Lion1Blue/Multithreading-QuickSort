@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 
+
 namespace Multithreading_Sortieralgorithmen
 {
     class QuickSort
@@ -38,7 +39,7 @@ namespace Multithreading_Sortieralgorithmen
             while (true)
             {
                 if (Stop)
-                    return -1;
+                    return 0;
 
                 while (array[left] < pivot)
                     left++;
