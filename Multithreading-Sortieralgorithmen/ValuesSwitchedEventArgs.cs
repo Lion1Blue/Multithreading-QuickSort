@@ -14,13 +14,11 @@ namespace Multithreading_Sortieralgorithmen
             Index2 = index2;
             Value1 = value1;
             Value2 = value2;
-            CurrentThread = Thread.CurrentThread;
             Color = color;
         }
 
         public System.Drawing.Color Color { get; private set; }
-
-        public Thread CurrentThread { get; private set; }
+        
         public int Index1 { get; private set; }
         public int Index2 { get; private set; }
 

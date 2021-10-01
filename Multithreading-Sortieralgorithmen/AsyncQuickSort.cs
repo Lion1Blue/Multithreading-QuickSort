@@ -21,17 +21,13 @@ namespace Multithreading_Sortieralgorithmen
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
 
-            AsyncQuickSortWrapper wrapper = new AsyncQuickSortWrapper();
-            wrapper.Array = array;
-            wrapper.Left = left;
-            wrapper.Right = right;
+            //Wrapper Class to call a method on a different Thread with Method Parameters
+            AsyncQuickSortWrapper wrapper = new AsyncQuickSortWrapper(array, left, right);
 
             Thread thread = new Thread(wrapper.Sort);
             threads.Add(thread);
-            thread.IsBackground = true;
 
             thread.Start();
-
             thread.Join();
 
             stopwatch.Stop();
@@ -54,14 +50,10 @@ namespace Multithreading_Sortieralgorithmen
 
             for (int i = 0; i < 2; i++)
             {
-                AsyncQuickSortWrapper wrapper = new AsyncQuickSortWrapper();
-                wrapper.Array = array;
-                wrapper.Left = pivots[i];
-                wrapper.Right = pivots[i + 1];
+                AsyncQuickSortWrapper wrapper = new AsyncQuickSortWrapper(array, pivots[i], pivots[i + 1]);
 
                 Thread thread = new Thread(wrapper.Sort);
                 threads.Add(thread);
-                thread.IsBackground = true;
 
                 thread.Start();
             }
@@ -94,14 +86,10 @@ namespace Multithreading_Sortieralgorithmen
 
             for (int i = 0; i < 4; i++)
             {
-                AsyncQuickSortWrapper wrapper = new AsyncQuickSortWrapper();
-                wrapper.Array = array;
-                wrapper.Left = pivots[i];
-                wrapper.Right = pivots[i + 1];
+                AsyncQuickSortWrapper wrapper = new AsyncQuickSortWrapper(array, pivots[i], pivots[i + 1]);
 
                 Thread thread = new Thread(wrapper.Sort);
                 threads.Add(thread);
-                thread.IsBackground = true;
 
                 thread.Start();
             }

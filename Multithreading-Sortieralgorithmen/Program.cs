@@ -18,11 +18,10 @@ namespace Multithreading_Sortieralgorithmen
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new MainForm());
 
             /*
             double[] array1 = new double[10000000];
-            double maxValue = 10d;
 
             Random random = new Random();
 
@@ -59,7 +58,6 @@ namespace Multithreading_Sortieralgorithmen
 
             AsyncQuickSort.Sort4Threads(array4, 0, array3.Length - 1);
             */
-
         }
 
         static bool IsSorted(double[] array)

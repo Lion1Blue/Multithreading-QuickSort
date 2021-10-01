@@ -55,6 +55,7 @@ namespace Multithreading_Sortieralgorithmen
 
                     ValuesSwitched?.Invoke(null, new ValuesSwitchedEventArgs(left, right, array[left], array[right], AsyncQuickSort.ThreadToColor(Thread.CurrentThread)));
 
+
                     if (array[left] == array[right])
                         left++;
                 }
