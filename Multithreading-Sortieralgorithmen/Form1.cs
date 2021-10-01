@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Drawing;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -12,11 +13,25 @@ namespace Multithreading_Sortieralgorithmen
         {
             InitializeComponent();
             QuickSort.ValuesSwitched += QuickSort_ValuesSwitched;
+            AsyncQuickSort.FinishedSorting += AsyncQuickSort_FinishedSorting;
+        }
+
+        private void AsyncQuickSort_FinishedSorting(object sender, EventArgs e)
+        {
+            this.Invoke((MethodInvoker)delegate {
+                buttonGenerate.Enabled = true;
+                buttonSort.Enabled = true;
+            });
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
             Bitmap bm = new Bitmap(pictureBox.Width, pictureBox.Height);
             Graphics gr = Graphics.FromImage(bm);
             gr.Clear(Color.White);
             pictureBox.Image = bm;
             PictureBoxHelperClass.PictureBox = pictureBox;
+            PictureBoxHelperClass.Array = array;
         }
 
         double[] array = new double[0];
@@ -25,13 +40,14 @@ namespace Multithreading_Sortieralgorithmen
         {
             this.Invoke((MethodInvoker)delegate {
                 //richTextBox1.AppendText($"values Changed. Index1: {e.Index1}, Index2: {e.Index2}, Value1: {e.Value1}, Value2: {e.Value2}\n");
-                richTextBox1.AppendText($"ThreadID: {e.CurrentThread.ManagedThreadId}, Time: {(float)(DateTime.Now.Second + (float)DateTime.Now.Millisecond / 1000f)}, Color: {e.Color.ToString()}\n");
+                //richTextBox1.AppendText($"ThreadID: {e.CurrentThread.ManagedThreadId}, Time: {(float)(DateTime.Now.Second + (float)DateTime.Now.Millisecond / 1000f)}, Color: {e.Color.ToString()}\n");
                 //UpdateSamples(e.Index1, e.Index2, e.Value1, e.Value2);
-                PictureBoxHelperClass.Array = array;
+                //PictureBoxHelperClass.Array = array;
                 PictureBoxHelperClass.E = e;
                 PictureBoxHelperClass.BigUpdate = false;
 
                 pictureBox.Refresh();
+                //pictureBox.Invalidate();
             });
         }
 
@@ -67,24 +83,25 @@ namespace Multithreading_Sortieralgorithmen
         private async void buttonSort_Click(object sender, EventArgs e)
         {
             QuickSort.Stop = false;
-            richTextBox1.Clear();
+
+            buttonGenerate.Enabled = false;
+            buttonSort.Enabled = false;
 
             switch (sortingAlgorithm)
             {
                 case CurrentSortingAlgorithm.QuickSort:
-                    await Task.Run(() => QuickSort.Sort(array, 0, array.Length - 1));
+                    await Task.Run(() => AsyncQuickSort.Sort1Thread(array, 0, array.Length - 1));
                     break;
 
                 case CurrentSortingAlgorithm.QuickSort2Threads:
                     await Task.Run(() => AsyncQuickSort.Sort2Threads(array, 0, array.Length - 1));
+                    //await Task.Factory.StartNew(() => AsyncQuickSort.Sort2Threads(array, 0, array.Length - 1));
                     break;
 
                 case CurrentSortingAlgorithm.QuickSort4Threads:
                     await Task.Run(() => AsyncQuickSort.Sort4Threads(array, 0, array.Length - 1));
                     break;
             }
-
-            
         }
 
         enum CurrentSortingAlgorithm { QuickSort, QuickSort2Threads, QuickSort4Threads };
@@ -108,11 +125,13 @@ namespace Multithreading_Sortieralgorithmen
         private void buttonBreak_Click(object sender, EventArgs e)
         {
             QuickSort.Stop = true;
+            buttonGenerate.Enabled = true;
+            buttonSort.Enabled = true;
         }
 
         private void pictureBox_Paint(object sender, PaintEventArgs e)
         {
-            PictureBoxHelperClass.Array = array;
+            //PictureBoxHelperClass.Array = array;
             (PictureBoxHelperClass.DecidePictureBoxUpdate())();
         }
     }

@@ -14,13 +14,13 @@ namespace Multithreading_Sortieralgorithmen
 
         public static PictureBox PictureBox { get; set;}
         public static double[] Array { get; set; }
-
         public static ValuesSwitchedEventArgs E { get; set; }
-
         public static bool BigUpdate { get; set; } = true;
+        public static float PenWidth { get; private set; }
 
         public static UpdatePictureBox DecidePictureBoxUpdate()
         {
+            PenWidth = (int)((float)PictureBox.Width / (float)Array.Length + 1);
             if (BigUpdate)
                 return PictureBoxRePaint;
             else
@@ -48,7 +48,7 @@ namespace Multithreading_Sortieralgorithmen
             {
                 int x = (int)(((double)pictureBox.Width / array.Length) * i);
 
-                Pen pen = new Pen(Color.Black);
+                Pen pen = new Pen(Color.Black, PenWidth);
                 Point one = new Point(x, pictureBox.Height);
                 Point two = new Point(x, (int)(pictureBox.Height - (int)((array[i] / (double)int.MaxValue) * pictureBox.Height)));
                 g.DrawLine(pen, one, two);
@@ -63,7 +63,7 @@ namespace Multithreading_Sortieralgorithmen
             Graphics g = Graphics.FromImage(bm);
 
             //Clear the Bitmap at index1 and index2
-            using (Pen penWhite = new Pen(Color.White))
+            using (Pen penWhite = new Pen(Color.White, PenWidth))
             {
                 int x = (int)(((double)pictureBox.Width / array.Length) * index1);
                 g.DrawLine(penWhite, new Point(x, pictureBox.Height), new Point(x, 0));
@@ -73,7 +73,7 @@ namespace Multithreading_Sortieralgorithmen
             }
 
             //Draw new Lines at index1 and index2
-            using (Pen penBlack = new Pen(E.Color))
+            using (Pen penBlack = new Pen(E.Color, PenWidth))
             {
                 int x = (int)(((double)pictureBox.Width / array.Length) * index1);
                 g.DrawLine(

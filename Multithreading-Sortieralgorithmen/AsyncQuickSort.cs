@@ -13,9 +13,32 @@ namespace Multithreading_Sortieralgorithmen
     {
         static List<Thread> threads = new List<Thread>();
         static Color[] colors = new Color[4] { Color.Orange, Color.Red, Color.Navy, Color.DarkOliveGreen };
-        public static void Sort(double[] array)
+        public static event EventHandler FinishedSorting;
+
+        public static void Sort1Thread(double[] array, int left, int right)
         {
-            Sort2Threads(array, 0, array.Length - 1);
+            threads.Clear();
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+
+            AsyncQuickSortWrapper wrapper = new AsyncQuickSortWrapper();
+            wrapper.Array = array;
+            wrapper.Left = left;
+            wrapper.Right = right;
+
+            Thread thread = new Thread(wrapper.Sort);
+            threads.Add(thread);
+            thread.IsBackground = true;
+
+            thread.Start();
+
+            thread.Join();
+
+            stopwatch.Stop();
+            PictureBoxHelperClass.BigUpdate = true;
+            FinishedSorting?.Invoke(null, new EventArgs());
+
+            Console.WriteLine($"[Normal]Sorted in {stopwatch.ElapsedMilliseconds} ms");
         }
 
         public static void Sort2Threads(double[] array, int left, int right)
@@ -38,6 +61,7 @@ namespace Multithreading_Sortieralgorithmen
 
                 Thread thread = new Thread(wrapper.Sort);
                 threads.Add(thread);
+                thread.IsBackground = true;
 
                 thread.Start();
             }
@@ -47,6 +71,7 @@ namespace Multithreading_Sortieralgorithmen
 
             stopwatch.Stop();
             PictureBoxHelperClass.BigUpdate = true;
+            FinishedSorting?.Invoke(null, new EventArgs());
 
             Console.WriteLine($"[Async2]Sorted in {stopwatch.ElapsedMilliseconds} ms");
         }
@@ -76,6 +101,7 @@ namespace Multithreading_Sortieralgorithmen
 
                 Thread thread = new Thread(wrapper.Sort);
                 threads.Add(thread);
+                thread.IsBackground = true;
 
                 thread.Start();
             }
@@ -84,6 +110,8 @@ namespace Multithreading_Sortieralgorithmen
                 t.Join();
 
             stopwatch.Stop();
+            PictureBoxHelperClass.BigUpdate = true;
+            FinishedSorting?.Invoke(null, new EventArgs());
 
             Console.WriteLine($"[Async4]Sorted in {stopwatch.ElapsedMilliseconds} ms");
         }
