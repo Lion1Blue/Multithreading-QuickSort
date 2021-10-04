@@ -7,7 +7,7 @@ using System.Threading;
 
 namespace Multithreading_Sortieralgorithmen
 {
-    class QuickSort
+    static class QuickSort
     {
         public static event EventHandler<ValuesSwitchedEventArgs> ValuesSwitched;
 
@@ -53,7 +53,7 @@ namespace Multithreading_Sortieralgorithmen
                     array[left] = array[right];
                     array[right] = temp;
 
-                    ValuesSwitched?.Invoke(null, new ValuesSwitchedEventArgs(left, right, array[left], array[right], AsyncQuickSort.ThreadToColor(Thread.CurrentThread)));
+                    ValuesSwitched?.Invoke(null, new ValuesSwitchedEventArgs(left, right, array[left], array[right]));
 
 
                     if (array[left] == array[right])

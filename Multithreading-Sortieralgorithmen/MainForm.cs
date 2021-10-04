@@ -21,8 +21,6 @@ namespace Multithreading_Sortieralgorithmen
             pictureBox.Image = bm;
             PictureBoxHelperClass.PictureBox = pictureBox;
             PictureBoxHelperClass.Array = array;
-            this.Refresh();
-            this.Update();
         }
 
         double[] array = new double[0];
@@ -48,7 +46,14 @@ namespace Multithreading_Sortieralgorithmen
         {
             string input = ((TextBox)sender).Text;
             if (input.Trim(' ') != string.Empty)
+            {
                 e.Cancel = !(uint.TryParse(input, out uint a));
+                if (a > 1000)
+                {
+                    MessageBox.Show("Enter only numbers smaller than 1000", "Restriction");
+                    e.Cancel = true;
+                }
+            }
         }
 
         private void buttonGenerate_Click(object sender, EventArgs e)
@@ -61,17 +66,15 @@ namespace Multithreading_Sortieralgorithmen
             Random random = new Random();
             
             for (int i = 0; i < array.Length; i++)
-            {
                 array[i] = random.Next(0, int.MaxValue);
-            }
 
             PictureBoxHelperClass.Array = array;
             PictureBoxHelperClass.BigUpdate = true;
+            PictureBoxHelperClass.Pivots = new int[0];
             PictureBoxHelperClass.PictureBoxRePaint();
-            
         }
 
-        private async void buttonSort_Click(object sender, EventArgs e)
+        private void buttonSort_Click(object sender, EventArgs e)
         {
             QuickSort.Stop = false;
             buttonGenerate.Enabled = false;
@@ -80,16 +83,15 @@ namespace Multithreading_Sortieralgorithmen
             switch (sortingAlgorithm)
             {
                 case CurrentSortingAlgorithm.QuickSort:
-                    await Task.Run(() => AsyncQuickSort.Sort1Thread(array, 0, array.Length - 1));
+                     Task.Run(() => AsyncQuickSort.Sort1Thread(array, 0, array.Length - 1));
                     break;
 
                 case CurrentSortingAlgorithm.QuickSort2Threads:
-                    await Task.Run(() => AsyncQuickSort.Sort2Threads(array, 0, array.Length - 1));
-                    //await Task.Factory.StartNew(() => AsyncQuickSort.Sort2Threads(array, 0, array.Length - 1));
+                     Task.Run(() => AsyncQuickSort.Sort2Threads(array, 0, array.Length - 1));
                     break;
 
                 case CurrentSortingAlgorithm.QuickSort4Threads:
-                    await Task.Run(() => AsyncQuickSort.Sort4Threads(array, 0, array.Length - 1));
+                     Task.Run(() => AsyncQuickSort.Sort4Threads(array, 0, array.Length - 1));
                     break;
             }
         }

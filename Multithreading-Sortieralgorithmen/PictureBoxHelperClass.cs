@@ -11,7 +11,8 @@ namespace Multithreading_Sortieralgorithmen
     class PictureBoxHelperClass
     {
         public delegate void UpdatePictureBox();
-
+        static Color[] colors = new Color[4] { Color.Orange, Color.Red, Color.Navy, Color.DarkOliveGreen };
+        public static int[] Pivots { get; set; } = new int[0]; 
         public static PictureBox PictureBox { get; set;}
         public static double[] Array { get; set; }
         public static ValuesSwitchedEventArgs E { get; set; }
@@ -29,7 +30,8 @@ namespace Multithreading_Sortieralgorithmen
 
         public static void PictureBoxValuesSwitched()
         {
-            UpdateSamples(PictureBox, Array, E.Index1, E.Index2, E.Value1, E.Value2);
+            if (E != null)
+                UpdateSamples(PictureBox, Array, E.Index1, E.Index2, E.Value1, E.Value2);
         }
 
         public static void PictureBoxRePaint()
@@ -48,7 +50,7 @@ namespace Multithreading_Sortieralgorithmen
             {
                 int x = (int)(((double)pictureBox.Width / array.Length) * i);
 
-                Pen pen = new Pen(Color.Black, PenWidth);
+                Pen pen = new Pen(PivotToColor(Pivots, i), PenWidth);
                 Point one = new Point(x, pictureBox.Height);
                 Point two = new Point(x, (int)(pictureBox.Height - (int)((array[i] / (double)int.MaxValue) * pictureBox.Height)));
                 g.DrawLine(pen, one, two);
@@ -73,7 +75,7 @@ namespace Multithreading_Sortieralgorithmen
             }
 
             //Draw new Lines at index1 and index2
-            using (Pen penBlack = new Pen(E.Color, PenWidth))
+            using (Pen penBlack = new Pen(PivotToColor(Pivots, index1), PenWidth))
             {
                 int x = (int)(((double)pictureBox.Width / array.Length) * index1);
                 g.DrawLine(
@@ -91,6 +93,20 @@ namespace Multithreading_Sortieralgorithmen
             }
 
             pictureBox.Image = bm;
+        }
+
+        private static Color PivotToColor(int[] pivots, int pivot)
+        {
+            for (int i = 1; i < pivots.Length; i++)
+            {
+                if (pivots[i - 1] <= pivot && pivot <= pivots[i])
+                {
+                    return colors[i - 1];
+                }
+            }
+
+
+            return Color.Black;
         }
 
 
