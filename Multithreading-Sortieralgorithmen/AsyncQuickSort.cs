@@ -31,6 +31,8 @@ namespace Multithreading_Sortieralgorithmen
 
             stopwatch.Stop();
             PictureBoxHelperClass.BigUpdate = true;
+
+            //Fire event finishedSorting
             FinishedSorting?.Invoke(null, new EventArgs());
 
             Console.WriteLine($"[Normal]Sorted in {stopwatch.ElapsedMilliseconds} ms");
@@ -41,22 +43,23 @@ namespace Multithreading_Sortieralgorithmen
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
 
+            //Creating pivot elements
             int[] pivots = new int[3];
             pivots[0] = left;
             pivots[1] = QuickSort.Partition(array, left, right);
             pivots[2] = right;
 
+            // setting pivot elements and BigUpdate Flag
             PictureBoxHelperClass.Pivots = pivots;
             PictureBoxHelperClass.BigUpdate = false;
             List<Thread> threads = new List<Thread>();
 
+            //creating threads
             for (int i = 0; i < 2; i++)
             {
                 AsyncQuickSortWrapper wrapper = new AsyncQuickSortWrapper(array, pivots[i], pivots[i + 1]);
-
                 Thread thread = new Thread(wrapper.Sort);
                 threads.Add(thread);
-
                 thread.Start();
             }
 
@@ -66,6 +69,8 @@ namespace Multithreading_Sortieralgorithmen
 
             stopwatch.Stop();
             PictureBoxHelperClass.BigUpdate = true;
+
+            //Fire event finishedSorting
             FinishedSorting?.Invoke(null, new EventArgs());
 
             Console.WriteLine($"[Async2]Sorted in {stopwatch.ElapsedMilliseconds} ms");
@@ -76,6 +81,7 @@ namespace Multithreading_Sortieralgorithmen
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
 
+            //Creating pivot elements
             int[] pivots = new int[5];
             pivots[0] = left;
             pivots[2] = QuickSort.Partition(array, left, right);
@@ -86,17 +92,17 @@ namespace Multithreading_Sortieralgorithmen
             pivots[3] = QuickSort.Partition(array, pivots[2] + 1, right);
             pivots[4] = right;
 
+            // setting pivot elements and BigUpdate Flag
             PictureBoxHelperClass.Pivots = pivots;
             PictureBoxHelperClass.BigUpdate = false;
             List<Thread> threads = new List<Thread>();
 
+            //creating threads
             for (int i = 0; i < 4; i++)
             {
                 AsyncQuickSortWrapper wrapper = new AsyncQuickSortWrapper(array, pivots[i], pivots[i + 1]);
-
                 Thread thread = new Thread(wrapper.Sort);
                 threads.Add(thread);
-
                 thread.Start();
             }
 
@@ -106,6 +112,8 @@ namespace Multithreading_Sortieralgorithmen
 
             stopwatch.Stop();
             PictureBoxHelperClass.BigUpdate = true;
+
+            //Fire event finishedSorting
             FinishedSorting?.Invoke(null, new EventArgs());
 
             Console.WriteLine($"[Async4]Sorted in {stopwatch.ElapsedMilliseconds} ms");
