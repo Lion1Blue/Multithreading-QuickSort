@@ -21,8 +21,5 @@ namespace Multithreading_Sortieralgorithmen
 
         public double Value1 { get; private set; }
         public double Value2 { get; private set; }
-
-
-
     }
 }

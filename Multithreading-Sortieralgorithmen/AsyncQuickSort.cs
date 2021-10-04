@@ -15,9 +15,6 @@ namespace Multithreading_Sortieralgorithmen
 
         public static void Sort1Thread(double[] array, int left, int right)
         {
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
-
             PictureBoxHelperClass.Pivots = new int[] { left, right };
 
             //Wrapper Class to call a method on a different Thread with Method Parameters
@@ -28,19 +25,12 @@ namespace Multithreading_Sortieralgorithmen
             //waiting for thread to join to main thread
             thread.Join();
 
-            stopwatch.Stop();
-
             //Fire event finishedSorting
             FinishedSorting?.Invoke(null, new EventArgs());
-
-            Console.WriteLine($"[Normal]Sorted in {stopwatch.ElapsedMilliseconds} ms");
         }
 
         public static void Sort2Threads(double[] array, int left, int right)
         {
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
-
             //Creating pivot elements
             int[] pivots = new int[3];
             pivots[0] = left;
@@ -64,19 +54,12 @@ namespace Multithreading_Sortieralgorithmen
             foreach (Thread t in threads)
                 t.Join();
 
-            stopwatch.Stop();
-
             //Fire event finishedSorting
             FinishedSorting?.Invoke(null, new EventArgs());
-
-            Console.WriteLine($"[Async2]Sorted in {stopwatch.ElapsedMilliseconds} ms");
         }
 
         public static void Sort4Threads(double[] array, int left, int right)
         {
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
-
             //Creating pivot elements
             int[] pivots = new int[5];
             pivots[0] = left;
@@ -105,12 +88,8 @@ namespace Multithreading_Sortieralgorithmen
             foreach (Thread t in threads)
                 t.Join();
 
-            stopwatch.Stop();
-
             //Fire event finishedSorting
             FinishedSorting?.Invoke(null, new EventArgs());
-
-            Console.WriteLine($"[Async4]Sorted in {stopwatch.ElapsedMilliseconds} ms");
         }
     }
 }

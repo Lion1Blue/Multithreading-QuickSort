@@ -70,7 +70,7 @@ namespace Multithreading_Sortieralgorithmen
 
             PictureBoxHelperClass.Array = array;
             PictureBoxHelperClass.Pivots = new int[0];
-            PictureBoxHelperClass.PictureBoxRePaint();
+            pictureBox.Refresh();
         }
 
         private void buttonSort_Click(object sender, EventArgs e)

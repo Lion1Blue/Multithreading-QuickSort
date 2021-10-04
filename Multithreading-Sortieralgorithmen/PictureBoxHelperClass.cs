@@ -26,10 +26,10 @@ namespace Multithreading_Sortieralgorithmen
             if (BigUpdate)
                 return PictureBoxRePaint;
 
-            return PictureBoxValuesSwitched;
+            return PictureBoxUpdate;
         }
 
-        public static void PictureBoxValuesSwitched()
+        public static void PictureBoxUpdate()
         {
             if (E != null)
                 UpdateSamples(PictureBox, Array, E.Index1, E.Index2, E.Value1, E.Value2);
