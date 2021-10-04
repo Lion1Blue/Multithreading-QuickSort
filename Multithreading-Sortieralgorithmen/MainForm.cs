@@ -29,7 +29,6 @@ namespace Multithreading_Sortieralgorithmen
         {
             this.Invoke((MethodInvoker)delegate {
                 PictureBoxHelperClass.E = e;
-                PictureBoxHelperClass.BigUpdate = false;
                 pictureBox.Refresh();
             });
         }
@@ -39,6 +38,7 @@ namespace Multithreading_Sortieralgorithmen
             this.Invoke((MethodInvoker)delegate {
                 buttonGenerate.Enabled = true;
                 buttonSort.Enabled = true;
+                PictureBoxHelperClass.BigUpdate = true;
             });
         }
 
@@ -69,16 +69,18 @@ namespace Multithreading_Sortieralgorithmen
                 array[i] = random.Next(0, int.MaxValue);
 
             PictureBoxHelperClass.Array = array;
-            PictureBoxHelperClass.BigUpdate = true;
             PictureBoxHelperClass.Pivots = new int[0];
             PictureBoxHelperClass.PictureBoxRePaint();
         }
 
         private void buttonSort_Click(object sender, EventArgs e)
         {
-            QuickSort.Stop = false;
+            if (array.Length == 0)
+                return;
+
             buttonGenerate.Enabled = false;
             buttonSort.Enabled = false;
+            PictureBoxHelperClass.BigUpdate = false;
 
             switch (sortingAlgorithm)
             {
@@ -116,7 +118,6 @@ namespace Multithreading_Sortieralgorithmen
 
         private void buttonBreak_Click(object sender, EventArgs e)
         {
-            QuickSort.Stop = true;
             buttonGenerate.Enabled = true;
             buttonSort.Enabled = true;
         }

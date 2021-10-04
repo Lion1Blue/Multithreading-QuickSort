@@ -19,7 +19,6 @@ namespace Multithreading_Sortieralgorithmen
             stopwatch.Start();
 
             PictureBoxHelperClass.Pivots = new int[] { left, right };
-            PictureBoxHelperClass.BigUpdate = false;
 
             //Wrapper Class to call a method on a different Thread with Method Parameters
             AsyncQuickSortWrapper wrapper = new AsyncQuickSortWrapper(array, left, right);
@@ -30,7 +29,6 @@ namespace Multithreading_Sortieralgorithmen
             thread.Join();
 
             stopwatch.Stop();
-            PictureBoxHelperClass.BigUpdate = true;
 
             //Fire event finishedSorting
             FinishedSorting?.Invoke(null, new EventArgs());
@@ -49,9 +47,8 @@ namespace Multithreading_Sortieralgorithmen
             pivots[1] = QuickSort.Partition(array, left, right);
             pivots[2] = right;
 
-            // setting pivot elements and BigUpdate Flag
+            // setting pivot elements
             PictureBoxHelperClass.Pivots = pivots;
-            PictureBoxHelperClass.BigUpdate = false;
             List<Thread> threads = new List<Thread>();
 
             //creating threads
@@ -68,7 +65,6 @@ namespace Multithreading_Sortieralgorithmen
                 t.Join();
 
             stopwatch.Stop();
-            PictureBoxHelperClass.BigUpdate = true;
 
             //Fire event finishedSorting
             FinishedSorting?.Invoke(null, new EventArgs());
@@ -92,9 +88,8 @@ namespace Multithreading_Sortieralgorithmen
             pivots[3] = QuickSort.Partition(array, pivots[2] + 1, right);
             pivots[4] = right;
 
-            // setting pivot elements and BigUpdate Flag
+            // setting pivot elements
             PictureBoxHelperClass.Pivots = pivots;
-            PictureBoxHelperClass.BigUpdate = false;
             List<Thread> threads = new List<Thread>();
 
             //creating threads
@@ -111,7 +106,6 @@ namespace Multithreading_Sortieralgorithmen
                 t.Join();
 
             stopwatch.Stop();
-            PictureBoxHelperClass.BigUpdate = true;
 
             //Fire event finishedSorting
             FinishedSorting?.Invoke(null, new EventArgs());

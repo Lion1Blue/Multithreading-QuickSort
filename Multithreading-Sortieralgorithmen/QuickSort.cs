@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
-
+using System.Threading.Tasks;
 
 namespace Multithreading_Sortieralgorithmen
 {
@@ -11,12 +11,8 @@ namespace Multithreading_Sortieralgorithmen
     {
         public static event EventHandler<ValuesSwitchedEventArgs> ValuesSwitched;
 
-        public static bool Stop { get; set; } = false;
         public static void Sort(double[] array, int left, int right)
         {
-            if (Stop)
-                return;
-
             if (left < right)
             {
                 int pivot = Partition(array, left, right);
@@ -38,9 +34,6 @@ namespace Multithreading_Sortieralgorithmen
 
             while (true)
             {
-                if (Stop)
-                    return 0;
-
                 while (array[left] < pivot)
                     left++;
 

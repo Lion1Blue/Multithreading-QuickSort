@@ -11,7 +11,7 @@ namespace Multithreading_Sortieralgorithmen
     class PictureBoxHelperClass
     {
         public delegate void UpdatePictureBox();
-        static Color[] colors = new Color[4] { Color.Orange, Color.Red, Color.Navy, Color.DarkOliveGreen };
+        static Color[] colors = new Color[4] { Color.Purple, Color.Orange, Color.SaddleBrown, Color.CornflowerBlue };
         public static int[] Pivots { get; set; } = new int[0]; 
         public static PictureBox PictureBox { get; set;}
         public static double[] Array { get; set; }
@@ -22,10 +22,11 @@ namespace Multithreading_Sortieralgorithmen
         public static UpdatePictureBox DecidePictureBoxUpdate()
         {
             PenWidth = (int)((float)PictureBox.Width / (float)Array.Length + 1);
+
             if (BigUpdate)
                 return PictureBoxRePaint;
-            else
-                return PictureBoxValuesSwitched;
+
+            return PictureBoxValuesSwitched;
         }
 
         public static void PictureBoxValuesSwitched()
@@ -98,18 +99,10 @@ namespace Multithreading_Sortieralgorithmen
         private static Color PivotToColor(int[] pivots, int pivot)
         {
             for (int i = 1; i < pivots.Length; i++)
-            {
                 if (pivots[i - 1] <= pivot && pivot <= pivots[i])
-                {
                     return colors[i - 1];
-                }
-            }
-
 
             return Color.Black;
         }
-
-
-
     }
 }

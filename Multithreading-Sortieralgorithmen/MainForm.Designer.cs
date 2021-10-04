@@ -37,7 +37,6 @@ namespace Multithreading_Sortieralgorithmen
             this.rbQuickSort2Threads = new System.Windows.Forms.RadioButton();
             this.rbQuickSort = new System.Windows.Forms.RadioButton();
             this.buttonSort = new System.Windows.Forms.Button();
-            this.buttonBreak = new System.Windows.Forms.Button();
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.groupBoxAlgorithmns.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
@@ -128,16 +127,6 @@ namespace Multithreading_Sortieralgorithmen
             this.buttonSort.UseVisualStyleBackColor = true;
             this.buttonSort.Click += new System.EventHandler(this.buttonSort_Click);
             // 
-            // buttonBreak
-            // 
-            this.buttonBreak.Location = new System.Drawing.Point(13, 162);
-            this.buttonBreak.Name = "buttonBreak";
-            this.buttonBreak.Size = new System.Drawing.Size(61, 23);
-            this.buttonBreak.TabIndex = 5;
-            this.buttonBreak.Text = "Break";
-            this.buttonBreak.UseVisualStyleBackColor = true;
-            this.buttonBreak.Click += new System.EventHandler(this.buttonBreak_Click);
-            // 
             // pictureBox
             // 
             this.pictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -150,19 +139,18 @@ namespace Multithreading_Sortieralgorithmen
             this.pictureBox.TabStop = false;
             this.pictureBox.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_Paint);
             // 
-            // Form1
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(836, 509);
             this.Controls.Add(this.pictureBox);
-            this.Controls.Add(this.buttonBreak);
             this.Controls.Add(this.buttonSort);
             this.Controls.Add(this.groupBoxAlgorithmns);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBoxElements);
             this.Controls.Add(this.buttonGenerate);
-            this.Name = "Form1";
+            this.Name = "MainForm";
             this.Text = "Visualisation-QuickSort";
             this.groupBoxAlgorithmns.ResumeLayout(false);
             this.groupBoxAlgorithmns.PerformLayout();
@@ -182,7 +170,6 @@ namespace Multithreading_Sortieralgorithmen
         private System.Windows.Forms.RadioButton rbQuickSort2Threads;
         private System.Windows.Forms.RadioButton rbQuickSort;
         private System.Windows.Forms.Button buttonSort;
-        private System.Windows.Forms.Button buttonBreak;
         private System.Windows.Forms.PictureBox pictureBox;
     }
 }
