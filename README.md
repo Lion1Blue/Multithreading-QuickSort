@@ -3,6 +3,7 @@
 ## Aufgabenstellung
 
 Eine Quicksort-Algorithmus Implementierung, die durch die Thread Programmierung optimiert wird.  
+Im Anschluss werden die verschiedenen Implementierungen verglichen, um zu sehen, ob die Optimierung gelungen ist.
 Als Programmiersprache wird c# verwendet.  
 
 ## Was ist [Multithreading](https://de.wikipedia.org/wiki/Multithreading) ?
@@ -128,5 +129,46 @@ public static void Main(string[] args)
 #### AsyncQuickSort
 - die Methode Sort(double[] array, int left, int right) erstellt mehrere Instanzen der Klasse AsyncQuickSortWrapper, setzt die Parameter und führt die Methode Sort() (AsyncQuickSortWrapper) in unterschiedlichen Threads aus.  
 
+<br>
 
+## Vergleich
 
+Array mit 10 000 000 Elementen(Debug Mode):
+
+#### Normaler QuickSort:  
+5955 ms  
+5503 ms  
+9095 ms  
+5701 ms  
+5526 ms  
+5600 ms
+
+#### Multithreading mit 2 Threads:  
+3977 ms  
+5126 ms  
+5091 ms  
+4942 ms  
+5719 ms  
+5115 ms
+
+#### Multithreading mit 4 Threads:
+3635 ms  
+4750 ms  
+4074 ms  
+4157 ms  
+4137 ms  
+4025 ms
+
+#### Vergleich mit Array.Sort:
+2914 ms  
+2311 ms  
+2564 ms  
+2371 ms  
+2345 ms  
+2750 ms
+
+<br>
+
+Zu sehen ist, dass durch Multihtreading eine Optimierung gelungen ist, die Array.Sort() Methode von c# jedoch fast immer 1.2 - 1.8x so schnell ist.  
+Auch anzumerken ist, dass die Unterteilung des QuickSorts abhängig vom Pivot Element ist und dieses in der Implementierung, immer das erste Element des Teilarray ist. Somit kann es dazu kommen, dass die Unterteilung sehr ungünstig ausfällt und wie in Bsp. 5 Normaler QuickSort / 2 Threads zu keiner Verbesserung, sondern sogar zu einer Verschlechterung der Laufzeit kommt.  
+Die 4 Thread Variant ist im Durchschnitt ca. 1.5x schneller als die normale Variante des QuickSort.  
