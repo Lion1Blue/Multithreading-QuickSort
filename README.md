@@ -1,9 +1,8 @@
-# Multithreading-Sortieralgorithmen
+# Multithreading-QuickSort
 
 ## Aufgabenstellung
 
 Eine Quicksort-Algorithmus Implementierung, die durch die Thread Programmierung optimiert wird.  
-Im Anschluss werden die beiden Ausführungen des Algorithmus verglichen um festzustellen, ob durch das Multithreading eine Optimierung des Algorithmus gelungen ist.  
 Als Programmiersprache wird c# verwendet.  
 
 ## Was ist [Multithreading](https://de.wikipedia.org/wiki/Multithreading) ?
