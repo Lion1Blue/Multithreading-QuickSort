@@ -170,5 +170,5 @@ Array mit 10 000 000 Elementen(Debug Mode):
 <br>
 
 Zu sehen ist, dass durch Multihtreading eine Optimierung gelungen ist, die Array.Sort() Methode von c# jedoch fast immer 1.2 - 1.8x so schnell ist.  
-Auch anzumerken ist, dass die Unterteilung des QuickSorts abhängig vom Pivot Element ist und dieses in der Implementierung, immer das erste Element des Teilarray ist. Somit kann es dazu kommen, dass die Unterteilung sehr ungünstig ausfällt und wie in Bsp. 5 Normaler QuickSort / 2 Threads zu keiner Verbesserung, sondern sogar zu einer Verschlechterung der Laufzeit kommt.
+Auch anzumerken ist, dass die Unterteilung des QuickSorts abhängig vom Pivot Element ist und dieses in der Implementierung, immer das erste Element des Teilarray ist. Somit kann es dazu kommen, dass die Unterteilung sehr ungünstig ausfällt und wie in Bsp. 5 Normaler QuickSort / 2 Threads zu keiner Verbesserung, sondern sogar zu einer Verschlechterung der Laufzeit kommt.  
 Die 4 Thread Variant ist im Durchschnitt ca. 1.5x schneller als die normale Variante des QuickSort.  
