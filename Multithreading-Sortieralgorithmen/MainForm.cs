@@ -15,10 +15,7 @@ namespace Multithreading_Sortieralgorithmen
             QuickSort.ValuesSwitched += QuickSort_ValuesSwitched;
             AsyncQuickSort.FinishedSorting += AsyncQuickSort_FinishedSorting;
 
-            Bitmap bm = new Bitmap(pictureBox.Width, pictureBox.Height);
-            Graphics gr = Graphics.FromImage(bm);
-            gr.Clear(Color.White);
-            pictureBox.Image = bm;
+            pictureBox.Image = new Bitmap(pictureBox.Width, pictureBox.Height);
             PictureBoxHelperClass.PictureBox = pictureBox;
             PictureBoxHelperClass.Array = array;
         }

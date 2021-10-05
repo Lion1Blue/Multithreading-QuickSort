@@ -65,27 +65,29 @@ namespace Multithreading_Sortieralgorithmen
             Bitmap bm = new Bitmap(pictureBox.Image);
             Graphics g = Graphics.FromImage(bm);
 
+            double xFactor = (double)pictureBox.Width / array.Length;
+
             //Clear the Bitmap at index1 and index2
             using (Pen penWhite = new Pen(Color.White, PenWidth))
             {
-                int x = (int)(((double)pictureBox.Width / array.Length) * index1);
+                int x = (int)(xFactor * index1);
                 g.DrawLine(penWhite, new Point(x, pictureBox.Height), new Point(x, 0));
 
-                x = (int)(((double)pictureBox.Width / array.Length) * index2);
+                x = (int)(xFactor * index2);
                 g.DrawLine(penWhite, new Point(x, pictureBox.Height), new Point(x, 0));
             }
 
             //Draw new Lines at index1 and index2
             using (Pen penBlack = new Pen(PivotToColor(Pivots, index1), PenWidth))
             {
-                int x = (int)(((double)pictureBox.Width / array.Length) * index1);
+                int x = (int)(xFactor * index1);
                 g.DrawLine(
                        penBlack,
                        new Point(x, pictureBox.Height),
                        new Point(x, (int)(pictureBox.Height - (int)((value1 / (double)int.MaxValue) * pictureBox.Height)))
                        );
 
-                x = (int)(((double)pictureBox.Width / array.Length) * index2);
+                x = (int)(xFactor * index2);
                 g.DrawLine(
                         penBlack,
                         new Point(x, pictureBox.Height),
